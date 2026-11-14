@@ -4,7 +4,7 @@ Snapshot commit code (made before any AI use): __________
 
 AI roles used this week (coach / reviewer / classmate / examiner / persona / proxy / none): coach
 
-Late? (true) No   ☐ Yes, I used a grace token (tokens left: __)
+Late? (true) No   (true) Yes, I used a grace token (tokens left: 1/2)
 Self-check (tick when true)
 (true) 1_attempt.md holds my own predictions or draft, made before AI.
 (true) Every number I kept from AI, I recalculated or checked (see log).
