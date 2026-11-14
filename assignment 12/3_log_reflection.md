@@ -1,14 +1,1 @@
-pythonraw.isna().sum()
-# date 0, item 0, city 0, price 0, unit 0, data_label 0It says 0 missing.
-Pic 2 + 3:pythonraw.duplicated()
-# 0 to 95 = False, 96 = True, Length: 97
-
-raw.info()
-# RangeIndex: 97 entries, 0 to 96
-# date        97 non-null  str
-# item        97 non-null  str
-# city        97 non-null  str
-# price       96 non-null  str   <- ONLY 96, NOT 97
-# unit        97 non-null  str
-# data_label  97 non-null  str
-# dtypes: str(6)
+Before and After - OverviewMetricBefore (raw)After (clean)Rows9796Columns66Duplicates10Price Typestrfloat64Date Typestrdatetime64Item TypestrcategoryCity TypestrcategoryUnit Typestrcategorydata_label TypestrcategoryMissing CountsColumnBefore MissingAfter Missingprice10date00item00city00unit00data_label00Price describe()StatisticBefore (raw)After (clean)countCannot calculate - price is text96meanCannot calculate - price is textCalculated after cleaningstdCannot calculate - price is textCalculated after cleaningminCannot calculate - price is textCalculated after cleaning25%Cannot calculate - price is textCalculated after cleaning50%Cannot calculate - price is textCalculated after cleaning75%Cannot calculate - price is textCalculated after cleaningmaxCannot calculate - price is textCalculated after cleaningItem CountsItemBeforeAfterTotal items counted9796Unique itemsCounted with spaces and capitals as differentCounted as 1 after strip and lowerCity CountsCityBeforeAfterlahoreSplit into Lahore, lahore , LHR1 clean value - lahoreOther citiesSplit by capitals and spaces1 clean value eachUnit CountsUnitBeforeAfterkgSplit into KG, Kilogram, kg.1 clean value - kgOther unitsSplit by capitals and spaces1 clean value eachRemoved Rows CheckCheckResultRows removed1Row removedRow 96 - exact duplicateValid observation removed?Yes - 1 row with missing price was also removed by dropnaVerdict TableAI Code LineVerdictEvidencereplace ["N/A","-","?"] to NAKEEPisna() showed 0 missing but info() showed price 96/97. Hidden missing was found only after replace.drop_duplicates()KEEPraw.duplicated().sum() = 1. Row 96 was exact copy. No valid data lost.str.strip().str.lower() on item, city, unit, data_labelKEEPBefore: Lahore, lahore , LHR counted as different. After: 1 city lahore. Label fixed, meaning not changed.replace LHR to lahore, Kilogram to kgMODIFYKeep only if LHR truly means Lahore for all rows. Check value_counts before and after.price remove Rs, commas to numericKEEPBefore price was str, describe() failed. After price is float64, describe() works.pd.to_datetime(dayfirst=True)KEEPBefore date was str in mixed formats. After date is datetime64, 0 NaT.dropna(subset=["price","date"])REJECT - MODIFYThis removed a valid observation. That row had valid item, city, date but no price. Better to fill price with median, not delete it.
